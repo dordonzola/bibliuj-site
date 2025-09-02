@@ -1,10 +1,9 @@
----
 items:
-  - text: Menu One
+  - text: Strona Główna
     url: "#"
-  - text: Menu Two
+  - text: Działalność
     url: "#"
-  - text: Menu Three
+  - text: O nas
     url: "#"
-  - text: Blog
-    url: "/blog"
+  - text: Dołącz do nas
+    url: /blog
