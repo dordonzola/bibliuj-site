@@ -3,6 +3,34 @@ const { DateTime } = require("luxon");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 // const htmlmin = require("html-minifier");
 
+
+
+
+const fs = require("fs");
+const path = require("path");
+
+module.exports = function(eleventyConfig) {
+  // Kolekcja stron na podstawie plików JSON w /content/pages
+  eleventyConfig.addCollection("pages", function(collectionApi) {
+    const pagesDir = path.join(__dirname, "content/pages");
+    if (!fs.existsSync(pagesDir)) return [];
+
+    const files = fs.readdirSync(pagesDir);
+    return files.map(file => {
+      const raw = fs.readFileSync(path.join(pagesDir, file));
+      return JSON.parse(raw);
+    });
+  });
+
+  return {
+    dir: {
+      input: "src",   // Twój folder ze źródłami
+      output: "_site" // Folder wyjściowy
+    }
+  };
+};
+
+
 module.exports = function (eleventyConfig) {
   // Disable automatic use of your .gitignore
   eleventyConfig.setUseGitIgnore(false);
